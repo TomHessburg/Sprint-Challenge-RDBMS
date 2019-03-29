@@ -40,6 +40,28 @@ server.get('/api/projects/:id', (req,res) => {
     .catch(err => res.status(500).json(err))
 });
 
+server.post('/api/projects', (req,res) => {
+  db('projects')
+    .insert(req.body)
+    .then(response => res.status(200).json(response))
+    .catch(err => res.status(500).json(err))
+});
+
+
+
+server.get('/api/actions', (req,res) => {
+  db('actions')
+    .then(proj => res.status(200).json(proj))
+    .catch(err => res.status(500).json(err))
+});
+
+server.post('/api/actions', (req,res) => {
+  db('actions')
+    .insert(req.body)
+    .then(response => res.status(200).json(response))
+    .catch(err => res.status(500).json(err))
+});
+
 const port = process.env.PORT || 5000;
 server.listen(port, () =>
   console.log(`\n** API running on http://localhost:${port} **\n`)
