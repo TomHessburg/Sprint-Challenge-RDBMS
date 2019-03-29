@@ -47,6 +47,24 @@ server.post('/api/projects', (req,res) => {
     .catch(err => res.status(500).json(err))
 });
 
+server.put('/api/projects/:id', (req,res) => {
+  db('projects')
+    .update(req.body)
+    .where({id: req.params.id})
+    .then(response => res.status(200).json(response))
+    .catch(err => res.status(500).json(err))
+});
+
+server.delete('/api/projects/:id', (req,res) => {
+  db('projects')
+    .where({id: req.params.id})
+    .del()
+    .then(response => res.status(200).json(response))
+    .catch(err => res.status(500).json(err))
+});
+
+
+
 
 
 server.get('/api/actions', (req,res) => {
@@ -58,6 +76,22 @@ server.get('/api/actions', (req,res) => {
 server.post('/api/actions', (req,res) => {
   db('actions')
     .insert(req.body)
+    .then(response => res.status(200).json(response))
+    .catch(err => res.status(500).json(err))
+});
+
+server.put('/api/actions/:id', (req,res) => {
+  db('actions')
+    .update(req.body)
+    .where({id: req.params.id})
+    .then(response => res.status(200).json(response))
+    .catch(err => res.status(500).json(err))
+});
+
+server.delete('/api/actions/:id', (req,res) => {
+  db('actions')
+    .where({id: req.params.id})
+    .del()
     .then(response => res.status(200).json(response))
     .catch(err => res.status(500).json(err))
 });
